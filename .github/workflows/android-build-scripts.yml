@@ -22,14 +22,14 @@ jobs:
           java-version: '17'
       - name: prerequisites
         run: ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --uninstall "cmake;3.10.2.4988404" "cmake;3.18.1"
-      - name: set up android ndk
+      - name: set up make dependencies
         run: |
           curl -s "https://dl.google.com/android/repository/android-ndk-${{ matrix.ndk-version }}.zip" -o ndk.zip
           unzip -q -o ndk.zip -d .ndk
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
+          sudo apt install gperf
       - name: run the build script
         run: ./android.sh -d -l --enable-gpl --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264
-
       - name: print build logs
         if: ${{ always() }}
         run: cat build.log
@@ -54,11 +54,12 @@ jobs:
           java-version: '17'
       - name: prerequisites
         run: ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --uninstall "cmake;3.10.2.4988404" "cmake;3.18.1"
-      - name: set up android ndk
+      - name: set up make dependencies
         run: |
           curl -s "https://dl.google.com/android/repository/android-ndk-${{ matrix.ndk-version }}.zip" -o ndk.zip
           unzip -q -o ndk.zip -d .ndk
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
+          sudo apt install gperf
       - name: run the build script
         run: ./android.sh -d -l --enable-gpl --lts --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264
       - name: print build logs
@@ -67,3 +68,4 @@ jobs:
       - name: print ffbuild logs
         if: ${{ failure() }}
         run: '[[ -f ./src/ffmpeg/ffbuild/config.log ]] && tail -50 ./src/ffmpeg/ffbuild/config.log'
+     
