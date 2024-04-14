@@ -29,7 +29,7 @@ jobs:
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
           sudo apt install autoconf automake libtool pkg-config curl git doxygen nasm cmake gcc gperf texinfo yasm bison autogen wget autopoint meson ninja-build ragel groff gtk-doc-tools libtasn1-6
       - name: run the build script
-        run: ./android.sh -d -l --enable-gpl --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264
+        run: ./android.sh -d -l --enable-gpl --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264 --enable-android-media-codec
       - name: print build logs
         if: ${{ always() }}
         run: cat build.log
@@ -61,7 +61,7 @@ jobs:
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
           sudo apt install autoconf automake libtool pkg-config curl git doxygen nasm cmake gcc gperf texinfo yasm bison autogen wget autopoint meson ninja-build ragel groff gtk-doc-tools libtasn1-6
       - name: run the build script
-        run: ./android.sh -d -l --enable-gpl --lts --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264
+        run: ./android.sh -d -l --enable-gpl --lts --disable-arm-v7a-neon --disable-x86 --disable-x86-64 --enable-lame --enable-libvorbis --enable-libwebp --enable-libxml2 --enable-openh264 --enable-opus --enable-x264 --enable-android-media-codec
       - name: print build logs
         if: ${{ always() }}
         run: cat build.log
