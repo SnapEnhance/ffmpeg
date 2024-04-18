@@ -36,6 +36,11 @@ jobs:
       - name: print ffbuild logs
         if: ${{ failure() }}
         run: '[[ -f ./src/ffmpeg/ffbuild/config.log ]] && tail -50 ./src/ffmpeg/ffbuild/config.log'
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: main
+          path: prebuilt/bundle-android-aar/*
   build-lts-on-linux:
     name: android lts on linux
     runs-on: ubuntu-22.04
@@ -68,4 +73,9 @@ jobs:
       - name: print ffbuild logs
         if: ${{ failure() }}
         run: '[[ -f ./src/ffmpeg/ffbuild/config.log ]] && tail -50 ./src/ffmpeg/ffbuild/config.log'
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: main
+          path: prebuilt/bundle-android-aar-lts/*
      
